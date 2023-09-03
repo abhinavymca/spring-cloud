@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: file:///Users/abhgarg6/Abhinav/IntellijWs/spring-cloud/bootstrap
+server:
+  port: 8888
