@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.ms.spec.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      imagePullSecrets:
+          - name: "{{ .Values.ms.imagePullSecrets }}"
+      containers:
+        - image: "{{ .Values.ms.image.repository }}:{{ .Values.ms.image.tag }}"
+          imagePullPolicy: {{ .Values.api.imagePullPolicy }}
+          name: {{ .Release.Name }}
+          livenessProbe:
+            httpGet: # make an HTTP request
+              port: 8080 # port to use
+              path: /actuator/health # endpoint to hit
+              scheme: HTTP # or HTTPS
+            initialDelaySeconds: 30 # how long to wait before checking
+            periodSeconds: 60 # how long to wait between checks
+            timeoutSeconds: 10 # how long to wait for a response
+            failureThreshold: 5
+          readinessProbe:
+            httpGet: # make an HTTP request
+              port: 8080 # port to use
+              path: /actuator/health # endpoint to hit
+              scheme: HTTP # or HTTPS
+            initialDelaySeconds: 30 # how long to wait before checking
+            periodSeconds: 60 # how long to wait between checks
+            timeoutSeconds: 10 # how long to wait for a response
+            failureThreshold: 5
+      restartPolicy: Always

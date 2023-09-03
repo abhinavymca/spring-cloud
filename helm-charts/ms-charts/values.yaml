@@ -1,0 +1,7 @@
+ms:
+  image:
+    repository:
+    tag:
+  imagePullPolicy: Always
+  spec:
+    replicas: 1
