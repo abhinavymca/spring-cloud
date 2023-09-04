@@ -1,6 +1,7 @@
 package org.sonic.user.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.sonic.user.config.DummyBean;
 import org.sonic.user.entity.AppUser;
 import org.sonic.user.model.UserDataDto;
 import org.sonic.user.model.UserResponseDto;
@@ -33,6 +34,12 @@ public class UserController {
     public ResponseEntity<String> signup(@RequestBody UserDataDto user) {
         String token = userService.signup(modelMapper.map(user, AppUser.class));
         return new ResponseEntity<>("{\"token\":\"" + token + "\"}", HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/config-values", produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> fetchBoot() {
+        String dummyBean = userService.getConfigValues();
+        return new ResponseEntity<>(dummyBean, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{username}")

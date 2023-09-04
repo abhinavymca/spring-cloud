@@ -1,4 +1,7 @@
 rootProject.name = 'spring-cloud'
 include 'user-ms'
 include 'config-server'
+include 'netflix-eureka-server'
+include 'booking-ms'
+include 'api-gateway'
 

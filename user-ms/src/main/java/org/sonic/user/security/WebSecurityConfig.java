@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-public class WebSecurityConfig /*extends WebSecurityConfigurerAdapter*/ {
+public class WebSecurityConfig {
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
@@ -31,6 +31,8 @@ public class WebSecurityConfig /*extends WebSecurityConfigurerAdapter*/ {
                 .antMatchers("/users/signin").permitAll()//
                 .antMatchers("/users/signup").permitAll()//
                 .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/actuator/**").permitAll()
+                .antMatchers("/users/config-values").permitAll()
                 // Disallow everything else..
                 .anyRequest().authenticated();
 

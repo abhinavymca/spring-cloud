@@ -1,6 +1,7 @@
 package org.sonic.user.service;
 
 import lombok.RequiredArgsConstructor;
+import org.sonic.user.config.DummyBean;
 import org.sonic.user.entity.AppUser;
 import org.sonic.user.exception.CustomException;
 import org.sonic.user.repostory.UserRepository;
@@ -24,6 +25,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
+    private final DummyBean dummyBean;
 
     public String signin(String username, String password) {
         try {
@@ -64,5 +66,10 @@ public class UserService {
 
     public String refresh(String username) {
         return jwtTokenProvider.createToken(username, userRepository.findByUsername(username).getAppUserRoles());
+    }
+
+    public String getConfigValues() {
+        System.out.println(dummyBean.toString());
+        return dummyBean.toString();
     }
 }

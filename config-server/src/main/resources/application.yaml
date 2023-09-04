@@ -5,6 +5,12 @@ spring:
     config:
       server:
         git:
-          uri: file:///Users/abhgarg6/Abhinav/IntellijWs/spring-cloud/bootstrap
+          uri: file:///Users/abhgarg6/Abhinav/IntellijWs/spring-cloud-bootstrap
+          default-label: master
 server:
   port: 8888
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka

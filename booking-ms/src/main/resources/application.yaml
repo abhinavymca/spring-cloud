@@ -1,0 +1,19 @@
+server:
+  port: 8100 # This is the default port anyway, but you can change it here
+
+spring:
+  application:
+    name: booking-ms
+  config:
+    import: optional:configserver:http://localhost:8888
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+
+logging:
+  level:
+    org:
+      springframework: INFO
