@@ -6,6 +6,7 @@ metadata:
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
+    app: {{ .Release.Name }}
 spec:
   replicas: {{ .Values.ms.spec.replicas }}
   selector:
@@ -19,12 +20,13 @@ spec:
       imagePullSecrets:
           - name: "{{ .Values.ms.imagePullSecrets }}"
       containers:
-        - image: "{{ .Values.ms.image.repository }}:{{ .Values.ms.image.tag }}"
-          imagePullPolicy: {{ .Values.api.imagePullPolicy }}
+        - image: "{{ .Values.ms.image.repository }}"
+          tag: {{ .Values.ms.image.tag }}
+          imagePullPolicy: {{ .Values.ms.imagePullPolicy }}
           name: {{ .Release.Name }}
           livenessProbe:
             httpGet: # make an HTTP request
-              port: 8080 # port to use
+              port: {{ .Values.ms.port }} # port to use
               path: /actuator/health # endpoint to hit
               scheme: HTTP # or HTTPS
             initialDelaySeconds: 30 # how long to wait before checking
@@ -33,7 +35,7 @@ spec:
             failureThreshold: 5
           readinessProbe:
             httpGet: # make an HTTP request
-              port: 8080 # port to use
+              port: {{ .Values.ms.port }} # port to use
               path: /actuator/health # endpoint to hit
               scheme: HTTP # or HTTPS
             initialDelaySeconds: 30 # how long to wait before checking

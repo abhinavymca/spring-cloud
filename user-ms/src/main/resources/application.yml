@@ -1,5 +1,7 @@
 server:
   port: 8000 # This is the default port anyway, but you can change it here
+  servlet:
+    context-path: user-ms
 
 spring:
   application:
@@ -48,7 +50,7 @@ logging:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://netflix-eureka-server/eureka
 
 test:
   abc: 1

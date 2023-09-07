@@ -5,3 +5,4 @@ ms:
   imagePullPolicy: Always
   spec:
     replicas: 1
+  port:
