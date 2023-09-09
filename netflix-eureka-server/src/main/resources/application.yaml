@@ -1,6 +1,9 @@
 spring:
   application:
-    name: /netflix-eureka-server
+    name: netflix-eureka-server
+  config:
+    import: optional:configserver:http://config-server
+
 server:
   port: 8761
 

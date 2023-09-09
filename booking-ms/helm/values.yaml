@@ -1,6 +1,6 @@
 ms:
   image:
-    repository:
+    repository: abhinavymca/booking-ms
     tag:
   imagePullPolicy: Always
   spec:
@@ -10,5 +10,3 @@ ms:
     type: ClusterIP
   livenessProbe:
   readinessProbe:
-  container:
-    args:

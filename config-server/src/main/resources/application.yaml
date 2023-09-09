@@ -5,12 +5,12 @@ spring:
     config:
       server:
         git:
-          uri: file:///Users/abhgarg6/Abhinav/IntellijWs/spring-cloud-bootstrap
-          default-label: master
+          uri: https://github.com/abhinavymca/spring-cloud-bootstrap
+          default-label: main
 server:
   port: 8888
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://netflix-eureka-server.default/eureka
+      defaultZone: http://netflix-eureka-server/eureka

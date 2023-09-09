@@ -4,9 +4,16 @@ spring:
   cloud:
     gateway:
       discovery:
+        enabled: true
+        all-namespaces: false
+        primary-port-name: "default-http"
+        discovery-server-url: "http://netflix-eureka-server"
+        include-not-ready-addresses: true
         locator:
-          enabled: true
+          enabled: false
           lowerCaseServiceId: true
+  config:
+    import: optional:configserver:http://config-server
 
 server:
   port: 8765
@@ -14,5 +21,5 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://netflix-eureka-server/eureka
+      defaultZone: http://localhost:8761/eureka
 

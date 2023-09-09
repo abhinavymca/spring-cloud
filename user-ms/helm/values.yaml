@@ -1,6 +1,6 @@
 ms:
   image:
-    repository:
+    repository: abhinavymca/user-ms
     tag:
   imagePullPolicy: Always
   spec:
@@ -8,7 +8,5 @@ ms:
   service:
     targetPort: 8080
     type: ClusterIP
-  livenessProbe:
-  readinessProbe:
-  container:
-    args:
+  livenessProbe: /user-ms
+  readinessProbe: /user-ms

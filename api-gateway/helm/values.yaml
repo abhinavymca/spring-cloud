@@ -1,14 +1,12 @@
 ms:
   image:
-    repository:
+    repository: abhinavymca/api-gateway
     tag:
   imagePullPolicy: Always
   spec:
     replicas: 1
   service:
     targetPort: 8080
-    type: ClusterIP
+    type: LoadBalancer
   livenessProbe:
   readinessProbe:
-  container:
-    args:

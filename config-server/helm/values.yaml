@@ -1,6 +1,6 @@
 ms:
   image:
-    repository:
+    repository: abhinavymca/config-server
     tag:
   imagePullPolicy: Always
   spec:
@@ -12,3 +12,7 @@ ms:
   readinessProbe:
   container:
     args:
+      - "java"
+      - "-jar"
+      - "app.jar"
+      - "--server.port=8080"

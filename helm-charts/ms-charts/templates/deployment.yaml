@@ -24,10 +24,16 @@ spec:
           tag: {{ .Values.ms.image.tag }}
           imagePullPolicy: {{ .Values.ms.imagePullPolicy }}
           name: {{ .Release.Name }}
+          {{- if .Values.ms.container.args }}
+          args:
+            {{- range $arg := .Values.ms.container.args }}
+            - "{{ $arg }}"
+            {{- end }}
+          {{- end }}
           livenessProbe:
             httpGet: # make an HTTP request
-              port: {{ .Values.ms.port }} # port to use
-              path: /actuator/health # endpoint to hit
+              port: {{ .Values.ms.service.targetPort }} # port to use
+              path: {{ .Values.ms.livenessProbe }}/actuator/health # endpoint to hit
               scheme: HTTP # or HTTPS
             initialDelaySeconds: 30 # how long to wait before checking
             periodSeconds: 60 # how long to wait between checks
@@ -35,8 +41,8 @@ spec:
             failureThreshold: 5
           readinessProbe:
             httpGet: # make an HTTP request
-              port: {{ .Values.ms.port }} # port to use
-              path: /actuator/health # endpoint to hit
+              port: {{ .Values.ms.service.targetPort }} # port to use
+              path: {{ .Values.ms.readinessProbe }}/actuator/health # endpoint to hit
               scheme: HTTP # or HTTPS
             initialDelaySeconds: 30 # how long to wait before checking
             periodSeconds: 60 # how long to wait between checks
